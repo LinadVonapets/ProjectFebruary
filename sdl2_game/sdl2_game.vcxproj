@@ -45,6 +45,7 @@
     <ClCompile Include="src\GameTexture.cpp" />
     <ClCompile Include="src\init.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\testFile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GameHUD.h" />
