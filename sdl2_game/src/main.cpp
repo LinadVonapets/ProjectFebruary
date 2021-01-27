@@ -138,7 +138,7 @@ int main(int argc, char *argv[])
 
 			player.render();
 			SDL_SetRenderDrawColor(gWindow.mRenderer, 0xff, 0x00, 0x00, 0xff);
-			SDL_RenderDrawRect(gWindow.mRenderer, &player.getCollider());
+			SDL_RenderDrawRect(gWindow.mRenderer, player.getCollider());
 
 
 			for (const auto &i : Walls)

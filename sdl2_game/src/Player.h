@@ -28,7 +28,7 @@ public:
 	void eventHandler(SDL_Event &e);
 	void move(const std::vector<SDL_Rect>&, std::vector<Item> &);
 	void render();
-	SDL_Rect getCollider();
+	const SDL_Rect *getCollider();
 	bool isCollised();
 	
 

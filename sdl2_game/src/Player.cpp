@@ -188,9 +188,9 @@ void Player::render()
 
 }
 
-SDL_Rect Player::getCollider()
+const SDL_Rect *Player::getCollider()
 {
-	return mCollider;
+	return &mCollider;
 }
 
 bool Player::isCollised()
