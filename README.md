@@ -1,2 +1,2 @@
-# Simple 2D RPG game
-Школьный проект
+# Simple 2D RPG game 
+School project
