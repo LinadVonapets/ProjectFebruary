@@ -10,7 +10,7 @@ GameTexture gHealthBarText;
 SDL_Rect gAnimationFrame[4][3];
 SDL_Rect gWallClip;
 SDL_Rect gBricksClip[2];
-SDL_Rect gItemsTextureClips[1];
+SDL_Rect gItemsTextureClips[item::TOTAL];
 
 SDL_Color textColor = { 0, 0, 0 };
 
@@ -51,7 +51,8 @@ bool loadMedia()
 	}
 	else
 	{
-		gItemsTextureClips[0] = { 321, 1129, 144, 150 };
+		gItemsTextureClips[item::KEY] = { 321, 1129, 144, 150 }; // Текстура ключа
+		gItemsTextureClips[item::SWORD] = { 1119, 639, 160, 160 };
 	}
 
 
@@ -88,8 +89,9 @@ int main(int argc, char *argv[])
 	bool quit = false;
 	SDL_Event e;
 
-	
 	Player player;
+
+
 
 	SDL_Rect wall = { 30, 400, 400, 40 };
 	SDL_Rect wall2 = { 430, 150, 40, 100 };
@@ -98,13 +100,14 @@ int main(int argc, char *argv[])
 	std::vector<SDL_Rect> Walls = { wall, wall2, wall3};
 
 
-	Item keyItem = { { 500, 500, 40, 40 }, ItemTypes::KEY };
-	Item keyItem2 = { { 500, 600, 40, 40 }, ItemTypes::KEY };
+	Item keyItem = { { 500, 500, 40, 40 }, item::KEY };
+	Item keyItem2 = { { 500, 600, 40, 40 }, item::SWORD };
 
-	std::vector<Item> Items = { keyItem };
+	std::vector<Item> Items = { keyItem, keyItem2 };
+
+
 
 	GameHUD HUD(&player);
-
 
 	while (!quit)
 	{
@@ -151,11 +154,20 @@ int main(int argc, char *argv[])
 			{
 				SDL_SetRenderDrawColor(gWindow.mRenderer, 0xff, 0xff, 0x00, 0xff);
 				SDL_RenderDrawRect(gWindow.mRenderer, &i.collider);
-				if (i.type == ItemTypes::KEY)
+				
+				switch (i.type)
 				{
-					gItemsTexture.render(i.collider.x, i.collider.y,
-						i.collider.w, i.collider.h, &gItemsTextureClips[0]);
+				case item::KEY:
+				case item::SWORD:
+					gItemsTexture.render
+					(	i.collider.x,
+						i.collider.y,
+						i.collider.w, 
+						i.collider.h,
+						&gItemsTextureClips[i.type]
+					);
 				}
+				
 			}
 
 			HUD.update();

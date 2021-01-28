@@ -11,18 +11,22 @@
 #include "GameWindow.h"
 #include <vector>
 
-enum class ItemTypes
+namespace item
 {
-	EMPTY,
-	KEY,
-	APPLE,
-	EAT,
-};
+	enum ItemTypes
+	{
+		EMPTY,
+		KEY,
+		APPLE,
+		SWORD,
+		TOTAL,
+	};
+}
 
 struct Item
 {
 	SDL_Rect collider;
-	ItemTypes type;
+	item::ItemTypes type;
 };
 
 

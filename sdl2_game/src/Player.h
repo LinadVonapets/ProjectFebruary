@@ -21,7 +21,7 @@ public:
 
 	static const int PLAYER_VEL = 5;
 	
-	ItemTypes inventory[3];
+	item::ItemTypes inventory[3];
 
 	short Health;
 	Player();
@@ -41,6 +41,7 @@ private:
 	SDL_Rect *mCurrentClip;
 	SDL_Rect mCollider;
 	bool detectCollision;
+	short destFrames = sizeof(gAnimationFrame[0]) / sizeof(gAnimationFrame[0][0]);
 	
 };
 

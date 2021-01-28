@@ -39,6 +39,7 @@
     <None Include="zlib1.dll" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\GameMapLoader.cpp" />
     <ClCompile Include="src\GameHUD.cpp" />
     <ClCompile Include="src\GameWindow.cpp" />
     <ClCompile Include="src\Player.cpp" />
@@ -48,6 +49,7 @@
     <ClCompile Include="src\testFile.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\GameMapLoader.h" />
     <ClInclude Include="src\GameHUD.h" />
     <ClInclude Include="src\GameWindow.h" />
     <ClInclude Include="src\globalVariables.h" />

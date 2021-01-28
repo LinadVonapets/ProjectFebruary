@@ -16,10 +16,11 @@ Player::Player()
 	mCollider.w = PLAYER_WIDTH;
 	mCollider.h = PLAYER_HEIGHT;
 	detectCollision = false;
-	for (ItemTypes &i : inventory)
+	for (item::ItemTypes &i : inventory)
 	{
-		i = ItemTypes::EMPTY;
+		i = item::EMPTY;
 	}
+	
 }
 
 void Player::eventHandler(SDL_Event &e)
@@ -83,7 +84,7 @@ void Player::move(const std::vector<SDL_Rect> &walls, std::vector<Item> &items)
 		{
 			for (int k = 0;k<3;k++) 
 			{
-				if (inventory[k] == ItemTypes::EMPTY)
+				if (inventory[k] == item::EMPTY)
 				{
 					inventory[k] = item.type;
 					items.erase(items.begin() + index);
@@ -103,10 +104,6 @@ void Player::move(const std::vector<SDL_Rect> &walls, std::vector<Item> &items)
 	}
 	*/
 }
-
-
-
-
 
 void Player::render()
 {
@@ -172,10 +169,10 @@ void Player::render()
 		SDL_Rect *currentStopDestination = nullptr;
 		switch (mStopDestination)
 		{
-		case UP: currentStopDestination = &gAnimationFrame[UP][1]; break;
-		case LEFT: currentStopDestination = &gAnimationFrame[LEFT][1]; break;
-		case RIGHT: currentStopDestination = &gAnimationFrame[RIGHT][1]; break;
-		case DOWN: currentStopDestination = &gAnimationFrame[DOWN][1]; break;
+		case UP: currentStopDestination = &gAnimationFrame[UP][destFrames/2]; break;
+		case LEFT: currentStopDestination = &gAnimationFrame[LEFT][destFrames/2]; break;
+		case RIGHT: currentStopDestination = &gAnimationFrame[RIGHT][destFrames / 2]; break;
+		case DOWN: currentStopDestination = &gAnimationFrame[DOWN][destFrames / 2]; break;
 		}
 
 		gPlayerTexture.render(mPosX, mPosY, PLAYER_WIDTH , PLAYER_HEIGHT , currentStopDestination);

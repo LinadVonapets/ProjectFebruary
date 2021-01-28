@@ -33,14 +33,18 @@ void GameHUD::render()
 
 		SDL_Rect innerRect = { InventorySlot.x + 2, InventorySlot.y + 2, 56, 56 };
 		SDL_Rect *currentItemClip = nullptr;
-		if (player->inventory[iii] != ItemTypes::EMPTY)
+
+		if (player->inventory[iii] != item::EMPTY)
 		{
 			SDL_SetRenderDrawColor(gWindow.mRenderer, 0x63, 0x63, 0x63, 0xff);
 			SDL_RenderFillRect(gWindow.mRenderer, &innerRect);
-			if (player->inventory[iii] == ItemTypes::KEY)
+			switch(player->inventory[iii])
 			{
-				currentItemClip = &gItemsTextureClips[0];
+			case item::KEY:
+			case item::SWORD:
+				currentItemClip = &gItemsTextureClips[player->inventory[iii]];
 			}
+			
 			gItemsTexture.render(innerRect.x, innerRect.y, innerRect.w, innerRect.h, currentItemClip);
 		}
 		else
