@@ -44,7 +44,7 @@
     <ClCompile Include="src\GameWindow.cpp" />
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\GameTexture.cpp" />
-    <ClCompile Include="src\init.cpp" />
+    <ClCompile Include="src\EngineCore.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\testFile.cpp" />
   </ItemGroup>
@@ -55,7 +55,7 @@
     <ClInclude Include="src\globalVariables.h" />
     <ClInclude Include="src\Player.h" />
     <ClInclude Include="src\GameTexture.h" />
-    <ClInclude Include="src\init.h" />
+    <ClInclude Include="src\EngineCore.h" />
     <ClInclude Include="src\textures.h" />
   </ItemGroup>
   <ItemGroup>

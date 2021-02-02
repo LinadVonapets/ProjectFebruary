@@ -1,7 +1,9 @@
-#include "init.h"
+#include "EngineCore.h"
 
 const int SCREEN_WIDTH = 1280;
 const int SCREEN_HEIGHT = 720;
+
+std::string levelNumAndName[2] = { "Level Name", "Level 0" };
 
 GameWindow gWindow;
 //Инициализация отрисовщика и окна
@@ -100,7 +102,7 @@ bool Init()
 	//Поиск джойстиков
 	if (SDL_NumJoysticks() == 0)
 	{
-		printf("Warning: No joystick connected!\n");
+		SDL_Log("No joystick connected!\n");
 	}
 	else
 	{

@@ -7,8 +7,8 @@ GameHUD::GameHUD(Player *ptrPlyer)
 	HealthBar = { 500, 625, 250, 30 };
 
 	//ѕробросить доступ к строкам название уровн€ и номеро уровн€, когда будет готов загрузчить карт
-	LevelNameTexture.loadFromRenderedText("Level Name", textColor, gFont);
-	LevelNumberTexture.loadFromRenderedText("Level 1", textColor, gFont12);
+	LevelNameTexture.loadFromRenderedText(levelNumAndName[0], textColor, gFont);
+	LevelNumberTexture.loadFromRenderedText(levelNumAndName[1], textColor, gFont12);
 }
 
 void GameHUD::update()

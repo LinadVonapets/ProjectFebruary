@@ -1,6 +1,6 @@
 #include "Player.h"
 #include "GameTexture.h"
-#include "init.h"
+#include "EngineCore.h"
 #include "GameHUD.h"
 
 GameTexture gItemsTexture;
@@ -187,6 +187,10 @@ int main(int argc, char *argv[])
 			HUD.render();
 			
 			SDL_RenderPresent(gWindow.mRenderer);
+		}
+		else
+		{
+			SDL_Delay(100);
 		}
 		
 	}

@@ -1,5 +1,5 @@
 #pragma once
-#include "init.h"
+#include "EngineCore.h"
 
 // Класс-оболочка текстуры
 class GameTexture

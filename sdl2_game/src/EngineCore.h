@@ -11,6 +11,8 @@
 #include "GameWindow.h"
 #include <vector>
 
+extern std::string levelNumAndName[2];
+
 namespace item
 {
 	enum ItemTypes

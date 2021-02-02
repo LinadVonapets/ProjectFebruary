@@ -1,5 +1,5 @@
 #pragma once
-#include "init.h"
+#include "EngineCore.h"
 #include "GameTexture.h"
 #include "Player.h"
 #include "textures.h"
