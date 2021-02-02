@@ -87,6 +87,7 @@ int main(int argc, char *argv[])
 
 	bool fullscreen = false;
 	bool quit = false;
+	bool debug_mode = true;
 	SDL_Event e;
 
 	Player player;
@@ -117,6 +118,13 @@ int main(int argc, char *argv[])
 			{
 				quit = true;
 			}
+			if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_l)
+			{
+				if (debug_mode)
+					debug_mode = false;
+				else
+					debug_mode = true;
+			}
 			player.eventHandler(e);
 			gWindow.handleEvent(e);
 		}
@@ -140,21 +148,26 @@ int main(int argc, char *argv[])
 			}
 
 			player.render();
-			SDL_SetRenderDrawColor(gWindow.mRenderer, 0xff, 0x00, 0x00, 0xff);
-			SDL_RenderDrawRect(gWindow.mRenderer, player.getCollider());
-
-
-			for (const auto &i : Walls)
+			if (debug_mode)
 			{
 				SDL_SetRenderDrawColor(gWindow.mRenderer, 0xff, 0x00, 0x00, 0xff);
-				SDL_RenderDrawRect(gWindow.mRenderer, &i);
+				SDL_RenderDrawRect(gWindow.mRenderer, player.getCollider());
 			}
-			
+			if (debug_mode)
+			{
+				for (const auto& i : Walls)
+				{
+					SDL_SetRenderDrawColor(gWindow.mRenderer, 0xff, 0x00, 0x00, 0xff);
+					SDL_RenderDrawRect(gWindow.mRenderer, &i);
+				}
+			}
 			for (const auto &i : Items)
 			{
-				SDL_SetRenderDrawColor(gWindow.mRenderer, 0xff, 0xff, 0x00, 0xff);
-				SDL_RenderDrawRect(gWindow.mRenderer, &i.collider);
-				
+				if (debug_mode)
+				{
+					SDL_SetRenderDrawColor(gWindow.mRenderer, 0xff, 0xff, 0x00, 0xff);
+					SDL_RenderDrawRect(gWindow.mRenderer, &i.collider);
+				}
 				switch (i.type)
 				{
 				case item::KEY:
