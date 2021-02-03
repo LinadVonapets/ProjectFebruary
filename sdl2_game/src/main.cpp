@@ -2,6 +2,7 @@
 #include "GameTexture.h"
 #include "EngineCore.h"
 #include "GameHUD.h"
+#include "GameMapLoader.h"
 
 GameTexture gItemsTexture;
 GameTexture gPlayerTexture;
@@ -85,29 +86,18 @@ int main(int argc, char *argv[])
 		return 0;
 	}
 
+
 	bool fullscreen = false;
 	bool quit = false;
-	bool debug_mode = true;
+	
 	SDL_Event e;
 
 	Player player;
+	
+	GameMapLoader mapLoader;
 
-
-
-	SDL_Rect wall = { 30, 400, 400, 40 };
-	SDL_Rect wall2 = { 430, 150, 40, 100 };
-	SDL_Rect wall3 = { 430, 340, 40, 100 };
-
-	std::vector<SDL_Rect> Walls = { wall, wall2, wall3};
-
-
-	Item keyItem = { { 500, 500, 40, 40 }, item::KEY };
-	Item keyItem2 = { { 500, 600, 40, 40 }, item::SWORD };
-
-	std::vector<Item> Items = { keyItem, keyItem2 };
-
-
-
+	mapLoader.loadMap(1);
+	
 	GameHUD HUD(&player);
 
 	while (!quit)
@@ -131,7 +121,7 @@ int main(int argc, char *argv[])
 
 		if (!gWindow.isMinimized())
 		{
-			player.move(Walls, Items);
+			player.move(mapLoader.walls, mapLoader.items);
 
 			SDL_SetRenderDrawColor(gWindow.mRenderer, 0xff, 0xff, 0xff, 0xff);
 			SDL_RenderClear(gWindow.mRenderer);
@@ -147,41 +137,9 @@ int main(int argc, char *argv[])
 				gBackgroundTexture.render(436, 32 + dist * i, 33, 48, &gBricksClip[1]);
 			}
 
+			mapLoader.render();
 			player.render();
-			if (debug_mode)
-			{
-				SDL_SetRenderDrawColor(gWindow.mRenderer, 0xff, 0x00, 0x00, 0xff);
-				SDL_RenderDrawRect(gWindow.mRenderer, player.getCollider());
-			}
-			if (debug_mode)
-			{
-				for (const auto& i : Walls)
-				{
-					SDL_SetRenderDrawColor(gWindow.mRenderer, 0xff, 0x00, 0x00, 0xff);
-					SDL_RenderDrawRect(gWindow.mRenderer, &i);
-				}
-			}
-			for (const auto &i : Items)
-			{
-				if (debug_mode)
-				{
-					SDL_SetRenderDrawColor(gWindow.mRenderer, 0xff, 0xff, 0x00, 0xff);
-					SDL_RenderDrawRect(gWindow.mRenderer, &i.collider);
-				}
-				switch (i.type)
-				{
-				case item::KEY:
-				case item::SWORD:
-					gItemsTexture.render
-					(	i.collider.x,
-						i.collider.y,
-						i.collider.w, 
-						i.collider.h,
-						&gItemsTextureClips[i.type]
-					);
-				}
-				
-			}
+			
 
 			HUD.update();
 			HUD.render();

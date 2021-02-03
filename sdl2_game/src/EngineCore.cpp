@@ -3,7 +3,9 @@
 const int SCREEN_WIDTH = 1280;
 const int SCREEN_HEIGHT = 720;
 
-std::string levelNumAndName[2] = { "Level Name", "Level 0" };
+bool debug_mode = true;
+
+std::string levelNumAndName[2] = { "\"Level Name\"", "Level 0" };
 
 GameWindow gWindow;
 //Инициализация отрисовщика и окна
@@ -68,7 +70,7 @@ bool Init()
 		printf("SDL could not initialize! SDL Error: %s\n", SDL_GetError());
 		success = false;
 	}
-	else if (!IMG_Init(imgFlags) & imgFlags) // Инициализация SDL_image
+	else if (!(IMG_Init(imgFlags) & imgFlags)) // Инициализация SDL_image
 	{
 		printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
 		success = false;

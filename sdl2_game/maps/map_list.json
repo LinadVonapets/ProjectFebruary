@@ -1,0 +1,13 @@
+{
+  "maps": [
+    "maps/level1.json",
+    "maps/level2.json"
+  ],
+
+  "empty_level": {
+    "level": {
+      "name": "empty",
+      "number": 0
+    }
+  }
+}

@@ -33,6 +33,9 @@
     <None Include="libvorbisfile-3.dll" />
     <None Include="SDL2_mixer.dll" />
     <None Include="SDL2_ttf.dll" />
+    <None Include="maps\map_list.json" />
+    <None Include="maps\level1.json" />
+    <None Include="maps\level2.json" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -48,9 +51,6 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="src\GameHUD.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="src\testFile.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="src\GameMapLoader.cpp">

@@ -32,10 +32,13 @@
     <None Include="libvorbis-0.dll" />
     <None Include="libvorbisfile-3.dll" />
     <None Include="libwebp-7.dll" />
+    <None Include="maps\level1.json" />
+    <None Include="maps\map_list.json" />
     <None Include="SDL2.dll" />
     <None Include="SDL2_image.dll" />
     <None Include="SDL2_mixer.dll" />
     <None Include="SDL2_ttf.dll" />
+    <None Include="maps\level2.json" />
     <None Include="zlib1.dll" />
   </ItemGroup>
   <ItemGroup>
@@ -46,7 +49,6 @@
     <ClCompile Include="src\GameTexture.cpp" />
     <ClCompile Include="src\EngineCore.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\testFile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GameMapLoader.h" />
@@ -128,7 +130,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Libraries\SDL2_mixer-2.0.4\include;C:\Libraries\SDL2_ttf-2.0.15\include;C:\Libraries\SDL2_image-2.0.5\include;C:\Libraries\SDL2-2.0.12\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\10022\OneDrive\Документы\Develop Projects\gameProject_C++\sdl2_game\sdl2_game\src\Dependencies\json\include;C:\Libraries\SDL2_mixer-2.0.4\include;C:\Libraries\SDL2_ttf-2.0.15\include;C:\Libraries\SDL2_image-2.0.5\include;C:\Libraries\SDL2-2.0.12\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

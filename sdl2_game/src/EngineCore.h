@@ -6,12 +6,16 @@
 #include <SDL_mixer.h>
 #include <SDL_ttf.h> // Раскомментировать, если необходим текст
 #include <cmath>
-#include <sstream> 
+#include <sstream>
+#include <vector> 
+#include <array>
+#include <fstream>
 #include "globalVariables.h"
 #include "GameWindow.h"
-#include <vector>
+#include <nlohmann/json.hpp>
 
 extern std::string levelNumAndName[2];
+extern bool debug_mode;
 
 namespace item
 {

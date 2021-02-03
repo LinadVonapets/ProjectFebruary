@@ -76,13 +76,12 @@ void Player::move(const std::vector<SDL_Rect> &walls, std::vector<Item> &items)
 	}
 
 	int index=0;
-
 	for (const auto &item : items)
 	{
 		
 		if (checkCollision(mCollider, item.collider))
 		{
-			for (int k = 0;k<3;k++) 
+			for (int k = 0; k < 3; k++)
 			{
 				if (inventory[k] == item::EMPTY)
 				{
@@ -90,9 +89,7 @@ void Player::move(const std::vector<SDL_Rect> &walls, std::vector<Item> &items)
 					items.erase(items.begin() + index);
 					break;
 				}
-				
 			}
-			
 		}
 		index++;
 	}
@@ -183,6 +180,11 @@ void Player::render()
 	if (mFrame / 6 >= 3)
 		mFrame = 0;
 
+	if (debug_mode)
+	{
+		SDL_SetRenderDrawColor(gWindow.mRenderer, 0xff, 0x00, 0x00, 0xff);
+		SDL_RenderDrawRect(gWindow.mRenderer, &mCollider);
+	}
 }
 
 const SDL_Rect *Player::getCollider()
