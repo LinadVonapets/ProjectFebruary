@@ -100,6 +100,8 @@ int main(int argc, char *argv[])
 	
 	GameHUD HUD(&player);
 
+	short cheatCode = 0;
+
 	while (!quit)
 	{
 		for (; SDL_PollEvent(&e) != 0;)
@@ -108,13 +110,39 @@ int main(int argc, char *argv[])
 			{
 				quit = true;
 			}
-			if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_l)
+
+			if (e.type == SDL_KEYDOWN)
+			{
+				switch (e.key.keysym.sym)
+				{
+				case SDLK_h:
+					cheatCode += 3;
+					break;
+				case SDLK_i:
+					cheatCode += 5;
+					break;
+				case SDLK_t:
+					cheatCode -= 7;
+					break;
+				default:
+					cheatCode = 0;
+				}
+			}
+			if (cheatCode == 1)
 			{
 				if (debug_mode)
+				{
 					debug_mode = false;
+					cheatCode = 0;
+				}
 				else
+				{
 					debug_mode = true;
+					cheatCode = 0;
+				}
 			}
+			if (!(cheatCode == 3 || cheatCode == 8) || cheatCode < 0)
+				cheatCode = 0;
 			player.eventHandler(e);
 			gWindow.handleEvent(e);
 		}
@@ -139,7 +167,8 @@ int main(int argc, char *argv[])
 
 			mapLoader.render();
 			player.render();
-			
+
+			std::cout << cheatCode << "\n";
 
 			HUD.update();
 			HUD.render();

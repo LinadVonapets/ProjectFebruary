@@ -157,11 +157,14 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\10022\OneDrive\Документы\Develop Projects\gameProject_C++\sdl2_game\sdl2_game\src\Dependencies\json\include;C:\Libraries\SDL2_mixer-2.0.4\include;C:\Libraries\SDL2_ttf-2.0.15\include;C:\Libraries\SDL2_image-2.0.5\include;C:\Libraries\SDL2-2.0.12\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>C:\Libraries\SDL2_ttf-2.0.15\lib\x86;C:\Libraries\SDL2_mixer-2.0.4\lib\x86;C:\Libraries\SDL2_image-2.0.5\lib\x86;C:\Libraries\SDL2-2.0.12\lib\x86;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
