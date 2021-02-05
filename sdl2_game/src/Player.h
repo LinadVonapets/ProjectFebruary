@@ -14,22 +14,29 @@ enum PlayerDestinaion
 
 class Player
 {
-	static const int playerStretch = 3;
+	static const int playerStretch = 3; // Растягивание спрайта игрока
 public:
 	static const int PLAYER_WIDTH = 16 * playerStretch;
 	static const int PLAYER_HEIGHT = 16 * playerStretch;
 
 	static const int PLAYER_VEL = 5;
 	
-	item::ItemTypes inventory[3];
+	std::array<itemNamespace::ItemTypes, 3> inventory;
 
-	short Health;
+	float Health;
+
 	Player();
-	void eventHandler(SDL_Event &e);
-	void move(const std::vector<SDL_Rect>&, std::vector<Item> &);
+	void handleEvent(SDL_Event &e);
+	void update(const std::vector<SDL_Rect>&, std::vector<Item> &);
 	void render();
 	const SDL_Rect *getCollider();
 	bool isCollised();
+	void setPosition(int x, int y);
+	void clearInventory();
+
+	const int &x = mPosX;
+	const int &y = mPosY;
+
 	
 
 private:

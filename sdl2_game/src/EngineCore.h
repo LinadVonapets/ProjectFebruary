@@ -16,8 +16,9 @@
 
 extern std::string levelNumAndName[2];
 extern bool debug_mode;
+extern bool plyrShwPos;
 
-namespace item
+namespace itemNamespace
 {
 	enum ItemTypes
 	{
@@ -32,7 +33,7 @@ namespace item
 struct Item
 {
 	SDL_Rect collider;
-	item::ItemTypes type;
+	itemNamespace::ItemTypes type;
 };
 
 

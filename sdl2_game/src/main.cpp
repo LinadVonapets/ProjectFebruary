@@ -7,12 +7,12 @@
 GameTexture gItemsTexture;
 GameTexture gPlayerTexture;
 GameTexture gBackgroundTexture;
-GameTexture gHealthBarText;
 SDL_Rect gAnimationFrame[4][3];
+SDL_Rect gItemsTextureClips[itemNamespace::TOTAL];
+
+//Тестовые текстуры
 SDL_Rect gWallClip;
 SDL_Rect gBricksClip[2];
-SDL_Rect gItemsTextureClips[item::TOTAL];
-
 SDL_Color textColor = { 0, 0, 0 };
 
 bool loadMedia()
@@ -52,8 +52,8 @@ bool loadMedia()
 	}
 	else
 	{
-		gItemsTextureClips[item::KEY] = { 321, 1129, 144, 150 }; // Текстура ключа
-		gItemsTextureClips[item::SWORD] = { 1119, 639, 160, 160 };
+		gItemsTextureClips[itemNamespace::KEY] = { 321, 1129, 144, 150 }; // Текстура ключа
+		gItemsTextureClips[itemNamespace::SWORD] = { 1119, 639, 160, 160 };
 	}
 
 
@@ -78,6 +78,8 @@ bool loadMedia()
 	return success;
 }
 
+bool playrShwPos = false;
+
 int main(int argc, char *argv[])
 {
 	if (!LMAI())
@@ -93,11 +95,7 @@ int main(int argc, char *argv[])
 	SDL_Event e;
 
 	Player player;
-	
-	GameMapLoader mapLoader;
-
-	mapLoader.loadMap(1);
-	
+	GameMapLoader mapLoader(&player);
 	GameHUD HUD(&player);
 
 	short cheatCode = 0;
@@ -143,34 +141,44 @@ int main(int argc, char *argv[])
 			}
 			if (!(cheatCode == 3 || cheatCode == 8) || cheatCode < 0)
 				cheatCode = 0;
-			player.eventHandler(e);
+			if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_c)
+				player.clearInventory();
+
+			player.handleEvent(e);
 			gWindow.handleEvent(e);
 		}
 
 		if (!gWindow.isMinimized())
 		{
-			player.move(mapLoader.walls, mapLoader.items);
+			mapLoader.update();
+			player.update(mapLoader.walls, mapLoader.items);
+			HUD.update();
 
 			SDL_SetRenderDrawColor(gWindow.mRenderer, 0xff, 0xff, 0xff, 0xff);
 			SDL_RenderClear(gWindow.mRenderer);
 
 			gBackgroundTexture.render(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
-			for(int i=0, dist=140; i < 3; i++)
-				gBackgroundTexture.render(31 + dist * i, 400, 160, 160, &gWallClip);
+			
+
+
+			for (int i = 0, dist = 140; i < 2; i++)
+			{
+				gBackgroundTexture.render(31 + dist * i, 350, 160, 160, &gWallClip);
+				gBackgroundTexture.render(950 + dist * i, 350, 160, 160, &gWallClip);
+			}
 			for (int i = 0, dist = 47; i < 10; i++)
 			{
 				if (i > 4 && i < 7)
 					continue;
-				gBackgroundTexture.render(436, 32 + dist * i, 33, 48, &gBricksClip[1]);
+				gBackgroundTexture.render(447, 32 + dist * i, 33, 48, &gBricksClip[1]);
+				gBackgroundTexture.render(800, 32 + dist * i, 33, 48, &gBricksClip[1]);
 			}
+
+			
 
 			mapLoader.render();
 			player.render();
-
-			std::cout << cheatCode << "\n";
-
-			HUD.update();
 			HUD.render();
 			
 			SDL_RenderPresent(gWindow.mRenderer);

@@ -5,25 +5,24 @@
 Player::Player()
 {
 	mFrame = 0;
-	mPosX = 200;
-	mPosY = 200;
+	mPosX = (SCREEN_WIDTH / 2) - PLAYER_WIDTH;
+	mPosY = (SCREEN_HEIGHT / 2) - PLAYER_HEIGHT;
 	mVelX = 0;
 	mVelY = 0;
-	Health = 167;
+	Health = 100;
 	mStopDestination = UP;
 	mDestination = DEFAULT;
 	mCurrentClip = nullptr;
 	mCollider.w = PLAYER_WIDTH;
 	mCollider.h = PLAYER_HEIGHT;
 	detectCollision = false;
-	for (item::ItemTypes &i : inventory)
+	for (itemNamespace::ItemTypes &i : inventory)
 	{
-		i = item::EMPTY;
+		i = itemNamespace::EMPTY;
 	}
-	
 }
 
-void Player::eventHandler(SDL_Event &e)
+void Player::handleEvent(SDL_Event &e)
 {
 	if (e.type == SDL_KEYDOWN && e.key.repeat == 0)
 	{
@@ -50,7 +49,7 @@ void Player::eventHandler(SDL_Event &e)
 }
 
 
-void Player::move(const std::vector<SDL_Rect> &walls, std::vector<Item> &items)
+void Player::update(const std::vector<SDL_Rect> &walls, std::vector<Item> &items)
 {
 	mPosX += mVelX;
 	mCollider.x = mPosX;
@@ -83,7 +82,7 @@ void Player::move(const std::vector<SDL_Rect> &walls, std::vector<Item> &items)
 		{
 			for (int k = 0; k < 3; k++)
 			{
-				if (inventory[k] == item::EMPTY)
+				if (inventory[k] == itemNamespace::EMPTY)
 				{
 					inventory[k] = item.type;
 					items.erase(items.begin() + index);
@@ -93,6 +92,14 @@ void Player::move(const std::vector<SDL_Rect> &walls, std::vector<Item> &items)
 		}
 		index++;
 	}
+
+	if (Health > 100)
+		Health = 100;
+	if (Health < 0)
+		Health = 0;
+
+	if (plyrShwPos)
+		std::cout << "X: " << mPosX << " Y: " << mPosY << "\n";
 /*
 	if (checkCollision(mCollider, keyItem))
 	{
@@ -195,5 +202,17 @@ const SDL_Rect *Player::getCollider()
 bool Player::isCollised()
 {
 	return detectCollision;
+}
+
+void Player::clearInventory()
+{
+	for (auto& slot : inventory)
+		slot = itemNamespace::EMPTY;
+}
+
+void Player::setPosition(int x, int y)
+{
+	mPosX = x;
+	mPosY = y;
 }
 

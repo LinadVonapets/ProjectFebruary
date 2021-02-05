@@ -4,6 +4,10 @@
     "number": 2
   },
 
+  "player": {
+    "position": [ 200, 200 ]
+  },
+
   "items": {
 
     "sword": [

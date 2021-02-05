@@ -4,6 +4,7 @@ const int SCREEN_WIDTH = 1280;
 const int SCREEN_HEIGHT = 720;
 
 bool debug_mode = true;
+bool plyrShwPos = false;
 
 std::string levelNumAndName[2] = { "\"Level Name\"", "Level 0" };
 

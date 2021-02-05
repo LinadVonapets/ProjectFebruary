@@ -7,7 +7,7 @@
 class GameHUD
 {
 public:
-	GameHUD(Player* PlyerPtr);
+	GameHUD(Player* ptrPlyer);
 	void update();
 	void render();
 

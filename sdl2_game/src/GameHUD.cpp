@@ -14,11 +14,13 @@ GameHUD::GameHUD(Player *ptrPlyer)
 void GameHUD::update()
 {
 	healthBarText.str("");
-	healthBarText << "Health " << static_cast<int>(player->Health / 2.44) << "%";
+	healthBarText << "Health " << player->Health << "%";
 	if (!HealthBarTexture.loadFromRenderedText(healthBarText.str().c_str(), textColor))
 	{
 		printf("Unable to render HEALTH TEXT!\n");
 	}
+	LevelNameTexture.loadFromRenderedText(levelNumAndName[0], textColor, gFont);
+	LevelNumberTexture.loadFromRenderedText(levelNumAndName[1], textColor, gFont12);
 }
 
 void GameHUD::render()
@@ -34,14 +36,14 @@ void GameHUD::render()
 		SDL_Rect innerRect = { InventorySlot.x + 2, InventorySlot.y + 2, 56, 56 };
 		SDL_Rect *currentItemClip = nullptr;
 
-		if (player->inventory[iii] != item::EMPTY)
+		if (player->inventory[iii] != itemNamespace::EMPTY)
 		{
 			SDL_SetRenderDrawColor(gWindow.mRenderer, 0x63, 0x63, 0x63, 0xff);
 			SDL_RenderFillRect(gWindow.mRenderer, &innerRect);
 			switch(player->inventory[iii])
 			{
-			case item::KEY:
-			case item::SWORD:
+			case itemNamespace::KEY:
+			case itemNamespace::SWORD:
 				currentItemClip = &gItemsTextureClips[player->inventory[iii]];
 			}
 			
@@ -72,7 +74,7 @@ void GameHUD::render()
 	SDL_Rect innerHealthBarUp = { 
 		HealthBar.x + 3,
 		HealthBar.y + 3,
-		HealthBar.w - (244 - player->Health) - 6, 
+		HealthBar.w - (244 - static_cast<int>(player->Health * 2.44)) - 6, 
 		HealthBar.h - 6 };
 	SDL_SetRenderDrawColor(gWindow.mRenderer, 0xff, 0x00, 0x00, 0xff);
 	SDL_RenderFillRect(gWindow.mRenderer, &innerHealthBarUp);

@@ -1,21 +1,29 @@
 #include "GameMapLoader.h"
 
 
-GameMapLoader::GameMapLoader() : fileIn("maps/map_list.json")
+GameMapLoader::GameMapLoader(Player *ptrPlyer) : fileIn("maps/map_list.json")
 {
+	player = ptrPlyer;
 	mMapList = nlohmann::json::parse(fileIn);
+	this->loadMap(1);
 }
 
 void GameMapLoader::loadMap(unsigned int levelNum)
 {
 	if (levelNum > 0 && levelNum <= mMapList["maps"].size())
 	{
+		this->clearAllEntity();
+		mapfile.close();
 		mapfile.open(mMapList["maps"][levelNum - 1].get<std::string>());
 		mMap = nlohmann::json::parse(mapfile);
 	}
 	else
 		mMap = mMapList["empty_level"];
 
+	if (!mMap["player"].empty())
+		player->setPosition(mMap["player"]["position"][0].get<int>(), mMap["player"]["position"][1].get<int>());
+	else
+		player->setPosition((SCREEN_WIDTH / 2) - player->PLAYER_WIDTH, (SCREEN_HEIGHT / 2) - player->PLAYER_HEIGHT);
 	
 	if (!mMap["level"].empty())
 	{
@@ -34,7 +42,7 @@ void GameMapLoader::loadMap(unsigned int levelNum)
 
 		if (mMap["items"].contains("sword"))
 		{
-			item_buff.type = item::SWORD;
+			item_buff.type = itemNamespace::SWORD;
 			for (const auto& i : mMap["items"]["sword"])
 			{
 				item_buff.collider = { i[0], i[1], i[2], i[3] };
@@ -45,7 +53,7 @@ void GameMapLoader::loadMap(unsigned int levelNum)
 		
 		if (mMap["items"].contains("keys"))
 		{
-			item_buff.type = item::KEY;
+			item_buff.type = itemNamespace::KEY;
 			for (const auto& i : mMap["items"]["keys"])
 			{
 				item_buff.collider = { i[0], i[1], i[2], i[3] };
@@ -90,8 +98,8 @@ void GameMapLoader::render()
 		}
 		switch (i.type)
 		{
-		case item::KEY:
-		case item::SWORD:
+		case itemNamespace::KEY:
+		case itemNamespace::SWORD:
 			gItemsTexture.render
 			(i.collider.x,
 				i.collider.y,
@@ -101,4 +109,21 @@ void GameMapLoader::render()
 			);
 		}
 	}
+}
+
+void GameMapLoader::update()
+{
+	if (player->x > 600 && player->x < 630 && player->y == 145)
+		for (auto& item : player->inventory)
+			if (item == itemNamespace::KEY)
+			{
+				item = itemNamespace::EMPTY;
+				this->loadMap(2);
+			}
+}
+
+void GameMapLoader::clearAllEntity()
+{
+	items.clear();
+	walls.clear();
 }
