@@ -63,50 +63,121 @@ void GameMapLoader::loadMap(unsigned int levelNum)
 		}
 
 	}
-
 	
 	if (!mMap["walls"].empty())
 	{
-		SDL_Rect wall_buff;
-		if (mMap["walls"].contains("default"))
+		Wall wall_buff;
+
+		if (mMap["walls"].contains("wood"))
 		{
-			for (const auto& i : mMap["walls"]["default"])
+			wall_buff.type = wallNamespace::WOOD_WALL;
+			for (const auto& i : mMap["walls"]["wood"])
 			{
-				wall_buff = { i[0], i[1], i[2], i[3] };
+				wall_buff.collider = { i["collider"][0], i["collider"][1], i["collider"][2], i["collider"][3] };
+
+				if (!i["rect"].empty())
+					wall_buff.rect = { i["rect"][0], i["rect"][1], i["rect"][2], i["rect"][3] };
+				else
+					wall_buff.rect = {};
+				
 				walls.push_back(wall_buff);
 			}
+			wall_buff = {};
+		}
+
+		if (mMap["walls"].contains("brick"))
+		{
+			wall_buff.type = wallNamespace::BRICK_VERTICAL;
+			for (const auto& i : mMap["walls"]["brick"])
+			{
+				wall_buff.collider = { i["collider"][0], i["collider"][1], i["collider"][2], i["collider"][3] };
+
+				if (!i["rect"].empty())
+					wall_buff.rect = { i["rect"][0], i["rect"][1], i["rect"][2], i["rect"][3] };
+				else
+					wall_buff.rect = {};
+
+				walls.push_back(wall_buff);
+			}
+			wall_buff = {};
 		}
 	}
 }
 
 void GameMapLoader::render()
 {
-	if (debug_mode)
+
+	gBackgroundTexture.render(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+
+	// Отрисовка сущностей на карте
+	
+	for (const auto& wall_i : walls)
 	{
-		for (const auto& i : walls)
+	
+		if (wall_i.type == wallNamespace::WOOD_WALL)
 		{
-			SDL_SetRenderDrawColor(gWindow.mRenderer, 0xff, 0x00, 0x00, 0xff);
-			SDL_RenderDrawRect(gWindow.mRenderer, &i);
+			if (!(wall_i.rect.w == 0 && wall_i.rect.h == 0))
+				for (int i = 0, dist = 140; i < 2; i++)
+				{
+					gBackgroundTexture.render(
+						wall_i.rect.x + dist * i, wall_i.rect.y,
+						wall_i.rect.w, wall_i.rect.h,
+						&gWallsTextureClips[wall_i.type]);
+				}
+			if (!(wall_i.collider.w == 0 && wall_i.collider.h == 0) && debug_mode)
+			{
+				SDL_SetRenderDrawColor(gWindow.mRenderer, 0xff, 0x00, 0x00, 0xff);
+				SDL_RenderDrawRect(gWindow.mRenderer, &wall_i.collider);
+			}
 		}
+
+		if (wall_i.type == wallNamespace::BRICK_VERTICAL)
+		{
+			if (!(wall_i.rect.w == 0 && wall_i.rect.h == 0))
+				for (int i = 0, dist = 47; i < 10; i++)
+				{
+					if (i > 4 && i < 7)
+						continue;
+					gBackgroundTexture.render(
+						wall_i.rect.x, wall_i.rect.y + dist * i,
+						wall_i.rect.w, wall_i.rect.h,
+						&gWallsTextureClips[wall_i.type]);
+				}
+			if (!(wall_i.collider.w == 0 && wall_i.collider.h == 0) && debug_mode)
+			{
+				SDL_SetRenderDrawColor(gWindow.mRenderer, 0xff, 0x00, 0x00, 0xff);
+				SDL_RenderDrawRect(gWindow.mRenderer, &wall_i.collider);
+			}
+		}
+
+		/*for (int i = 0, dist = 47; i < 10; i++)
+		{
+			if (i > 4 && i < 7)
+				continue;
+			gBackgroundTexture.render(447, 32 + dist * i, 33, 48, &gBricksClip[1]);
+			gBackgroundTexture.render(800, 32 + dist * i, 33, 48, &gBricksClip[1]);
+		}*/
 	}
-	for (const auto& i : items)
+	
+	for (const auto &item_i : items)
 	{
 		if (debug_mode)
 		{
 			SDL_SetRenderDrawColor(gWindow.mRenderer, 0xff, 0xff, 0x00, 0xff);
-			SDL_RenderDrawRect(gWindow.mRenderer, &i.collider);
+			SDL_RenderDrawRect(gWindow.mRenderer, &item_i.collider);
 		}
-		switch (i.type)
+		switch (item_i.type)
 		{
 		case itemNamespace::KEY:
 		case itemNamespace::SWORD:
 			gItemsTexture.render
-			(i.collider.x,
-				i.collider.y,
-				i.collider.w,
-				i.collider.h,
-				&gItemsTextureClips[i.type]
+			(item_i.collider.x,
+				item_i.collider.y,
+				item_i.collider.w,
+				item_i.collider.h,
+				&gItemsTextureClips[item_i.type]
 			);
+			break;
 		}
 	}
 }

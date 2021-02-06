@@ -27,7 +27,7 @@ public:
 
 	Player();
 	void handleEvent(SDL_Event &e);
-	void update(const std::vector<SDL_Rect>&, std::vector<Item> &);
+	void update(const std::vector<Wall>&, std::vector<Item> &);
 	void render();
 	const SDL_Rect *getCollider();
 	bool isCollised();

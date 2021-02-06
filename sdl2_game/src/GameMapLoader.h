@@ -12,7 +12,8 @@ public:
 	void update();
 	
 	std::vector<Item> items;
-	std::vector<SDL_Rect> walls;
+	std::vector<Wall> walls;
+	
 private:
 	std::ifstream mapfile;
 	std::ifstream fileIn;

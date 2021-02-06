@@ -28,10 +28,10 @@ void Player::handleEvent(SDL_Event &e)
 	{
 		switch (e.key.keysym.sym)
 		{
-		case SDLK_w: mVelY -= PLAYER_VEL; /*mDestination = UP;*/ break;
-		case SDLK_a: mVelX -= PLAYER_VEL; /*mDestination = LEFT;*/ break;
-		case SDLK_s: mVelY += PLAYER_VEL; /*mDestination = DOWN;*/ break;
-		case SDLK_d: mVelX += PLAYER_VEL; /*mDestination = RIGHT;*/  break;
+		case SDLK_w: mVelY -= PLAYER_VEL; break;
+		case SDLK_a: mVelX -= PLAYER_VEL; break;
+		case SDLK_s: mVelY += PLAYER_VEL; break;
+		case SDLK_d: mVelX += PLAYER_VEL; break;
 		}
 
 	}
@@ -39,35 +39,48 @@ void Player::handleEvent(SDL_Event &e)
 	{
 		switch (e.key.keysym.sym)
 		{
-		case SDLK_w: mVelY += PLAYER_VEL; /*mStopDestination = UP; mDestination = DEFAULT;*/ break;
-		case SDLK_a: mVelX += PLAYER_VEL; /*mStopDestination = LEFT; mDestination = DEFAULT;*/ break;
-		case SDLK_s: mVelY -= PLAYER_VEL; /*mStopDestination = DOWN; mDestination = DEFAULT;*/ break;
-		case SDLK_d: mVelX -= PLAYER_VEL; /*mStopDestination = RIGHT; mDestination = DEFAULT;*/ break;
+		case SDLK_w: mVelY += PLAYER_VEL; break;
+		case SDLK_a: mVelX += PLAYER_VEL; break;
+		case SDLK_s: mVelY -= PLAYER_VEL; break;
+		case SDLK_d: mVelX -= PLAYER_VEL; break;
 		}
 
 	}
 }
 
 
-void Player::update(const std::vector<SDL_Rect> &walls, std::vector<Item> &items)
+void Player::update(const std::vector<Wall> &walls, std::vector<Item> &items)
 {
+
 	mPosX += mVelX;
 	mCollider.x = mPosX;
+
+	mPosY += mVelY;
+	mCollider.y = mPosY;
+
+	if (mPosX < 33 || mPosX + PLAYER_WIDTH > SCREEN_WIDTH - 33)
+	{
+		mPosX -= mVelX;
+		mCollider.x = mPosX;
+	}
+	if (mPosY < 190 - PLAYER_WIDTH || mPosY + PLAYER_HEIGHT  > SCREEN_HEIGHT - 23)
+	{
+		mPosY -= mVelY;
+		mCollider.y = mPosY;
+	}
+
 	for (const auto &i : walls) 
 	{
-		if (mPosX < 33 || mPosX + PLAYER_WIDTH > SCREEN_WIDTH - 33 || checkCollision(mCollider, i))
+		if (checkCollision(mCollider, i.collider))
 		{
 			mPosX -= mVelX;
 			mCollider.x = mPosX;
 		}
 	}
 
-
-	mPosY += mVelY;
-	mCollider.y = mPosY;
 	for (const auto &i : walls)
 	{
-		if (mPosY < 190 - PLAYER_WIDTH || mPosY + PLAYER_HEIGHT  > SCREEN_HEIGHT - 23 || checkCollision(mCollider, i))
+		if (checkCollision(mCollider, i.collider))
 		{
 			mPosY -= mVelY;
 			mCollider.y = mPosY;
@@ -100,13 +113,6 @@ void Player::update(const std::vector<SDL_Rect> &walls, std::vector<Item> &items
 
 	if (plyrShwPos)
 		std::cout << "X: " << mPosX << " Y: " << mPosY << "\n";
-/*
-	if (checkCollision(mCollider, keyItem))
-	{
-		inventory[0] = PlayerItems::KEY;
-		keyItem.x = 10000;
-	}
-	*/
 }
 
 void Player::render()

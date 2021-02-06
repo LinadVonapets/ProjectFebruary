@@ -58,7 +58,18 @@ namespace itemNamespace
 		KEY,
 		APPLE,
 		SWORD,
-		TOTAL,
+		TOTAL
+	};
+}
+
+namespace wallNamespace
+{
+	enum WallTypes
+	{
+		BRICK_HORIZONTAL,
+		BRICK_VERTICAL,
+		WOOD_WALL,
+		TOTAL
 	};
 }
 
@@ -67,6 +78,14 @@ struct Item
 	SDL_Rect collider;
 	itemNamespace::ItemTypes type;
 };
+
+struct Wall
+{
+	SDL_Rect collider;
+	SDL_Rect rect;
+	wallNamespace::WallTypes type;
+};
+
 
 extern std::string levelNumAndName[2];
 extern bool debug_mode;

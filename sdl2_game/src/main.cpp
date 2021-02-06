@@ -10,10 +10,8 @@ GameTexture gPlayerTexture;
 GameTexture gBackgroundTexture;
 SDL_Rect gAnimationFrame[4][3];
 SDL_Rect gItemsTextureClips[itemNamespace::TOTAL];
+SDL_Rect gWallsTextureClips[wallNamespace::TOTAL];
 
-//Тестовые текстуры
-SDL_Rect gWallClip;
-SDL_Rect gBricksClip[2];
 SDL_Color textColor = { 0, 0, 0 };
 
 bool loadMedia()
@@ -41,9 +39,9 @@ bool loadMedia()
 	}
 	else
 	{
-		gWallClip = { 32, 32, 161, 161 }; //Вертикальная стена
-		gBricksClip[0] = { 32, 0, 48, 33 }; //Горизонтальный кирпич
-		gBricksClip[1] = { 0, 0, 33, 48 }; //Вертикальный кирпич
+		gWallsTextureClips[wallNamespace::WOOD_WALL] = { 32, 32, 161, 161 }; //Вертикальная стена
+		gWallsTextureClips[wallNamespace::BRICK_HORIZONTAL] = { 32, 0, 48, 33 }; //Горизонтальный кирпич
+		gWallsTextureClips[wallNamespace::BRICK_VERTICAL] = { 0, 0, 33, 48 }; //Вертикальный кирпич
 	}
 
 	if (!gItemsTexture.loadFromFile("images/items.png"))
@@ -158,23 +156,7 @@ int main(int argc, char *argv[])
 			SDL_SetRenderDrawColor(gWindow.mRenderer, 0xff, 0xff, 0xff, 0xff);
 			SDL_RenderClear(gWindow.mRenderer);
 
-			gBackgroundTexture.render(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-
 			
-
-
-			for (int i = 0, dist = 140; i < 2; i++)
-			{
-				gBackgroundTexture.render(31 + dist * i, 350, 160, 160, &gWallClip);
-				gBackgroundTexture.render(950 + dist * i, 350, 160, 160, &gWallClip);
-			}
-			for (int i = 0, dist = 47; i < 10; i++)
-			{
-				if (i > 4 && i < 7)
-					continue;
-				gBackgroundTexture.render(447, 32 + dist * i, 33, 48, &gBricksClip[1]);
-				gBackgroundTexture.render(800, 32 + dist * i, 33, 48, &gBricksClip[1]);
-			}
 
 			
 
