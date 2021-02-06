@@ -1,6 +1,7 @@
+#include "EngineCore.h"
+
 #include "Player.h"
 #include "GameTexture.h"
-#include "EngineCore.h"
 #include "GameHUD.h"
 #include "GameMapLoader.h"
 

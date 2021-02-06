@@ -1,41 +1,21 @@
 #pragma once
 #include <iostream>
 #include <string>
-#include <SDL.h>
-#include <SDL_image.h>
-#include <SDL_mixer.h>
-#include <SDL_ttf.h> // Раскомментировать, если необходим текст
 #include <cmath>
 #include <sstream>
 #include <vector> 
 #include <array>
 #include <fstream>
-#include "globalVariables.h"
-#include "GameWindow.h"
+
+#include <SDL.h>
+#include <SDL_image.h>
+#include <SDL_mixer.h>
+#include <SDL_ttf.h> // Раскомментировать, если необходим текст
+
 #include <nlohmann/json.hpp>
 
-extern std::string levelNumAndName[2];
-extern bool debug_mode;
-extern bool plyrShwPos;
-
-namespace itemNamespace
-{
-	enum ItemTypes
-	{
-		EMPTY,
-		KEY,
-		APPLE,
-		SWORD,
-		TOTAL,
-	};
-}
-
-struct Item
-{
-	SDL_Rect collider;
-	itemNamespace::ItemTypes type;
-};
-
+#include "globalVariables.h"
+#include "GameWindow.h"
 
 // Инициализация аудио переменных
 	// Музыка, которая будет играть
@@ -61,18 +41,37 @@ extern TTF_Font *gFont12;
 
 //Инициализация SDL2
 bool Init();
-
 // Загрузка медиа
 bool loadMedia();
-
 // Освобождение
 void close();
-
 // Функционал loadMedia() и Init() в одной функции
 bool LMAI();
-
 //Проверка столкновений
 bool checkCollision(const SDL_Rect &a, const SDL_Rect &b);
+
+namespace itemNamespace
+{
+	enum ItemTypes
+	{
+		EMPTY,
+		KEY,
+		APPLE,
+		SWORD,
+		TOTAL,
+	};
+}
+
+struct Item
+{
+	SDL_Rect collider;
+	itemNamespace::ItemTypes type;
+};
+
+extern std::string levelNumAndName[2];
+extern bool debug_mode;
+extern bool plyrShwPos;
+
 
 
 

@@ -3,11 +3,6 @@
 const int SCREEN_WIDTH = 1280;
 const int SCREEN_HEIGHT = 720;
 
-bool debug_mode = true;
-bool plyrShwPos = false;
-
-std::string levelNumAndName[2] = { "\"Level Name\"", "Level 0" };
-
 GameWindow gWindow;
 //Инициализация отрисовщика и окна
 //Инициализация джойстика
@@ -28,6 +23,13 @@ Mix_Chunk *gLow{ nullptr };
 TTF_Font *gFont{ nullptr };
 TTF_Font *gFont12{ nullptr };
 #endif
+
+
+bool debug_mode = true;
+bool plyrShwPos = false;
+
+std::string levelNumAndName[2] = { "\"Level Name\"", "Level 0" };
+
 
 bool checkCollision(const SDL_Rect &a, const SDL_Rect &b)
 {
