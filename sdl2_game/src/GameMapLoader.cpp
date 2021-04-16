@@ -150,13 +150,6 @@ void GameMapLoader::render()
 			}
 		}
 
-		/*for (int i = 0, dist = 47; i < 10; i++)
-		{
-			if (i > 4 && i < 7)
-				continue;
-			gBackgroundTexture.render(447, 32 + dist * i, 33, 48, &gBricksClip[1]);
-			gBackgroundTexture.render(800, 32 + dist * i, 33, 48, &gBricksClip[1]);
-		}*/
 	}
 	
 	for (const auto &item_i : items)

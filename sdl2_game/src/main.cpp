@@ -99,6 +99,8 @@ int main(int argc, char *argv[])
 
 	short cheatCode = 0;
 
+	SDL_Rect doorRect = { 600, 100, 78, 90};
+
 	while (!quit)
 	{
 		for (; SDL_PollEvent(&e) != 0;)
@@ -155,10 +157,6 @@ int main(int argc, char *argv[])
 
 			SDL_SetRenderDrawColor(gWindow.mRenderer, 0xff, 0xff, 0xff, 0xff);
 			SDL_RenderClear(gWindow.mRenderer);
-
-			
-
-			
 
 			mapLoader.render();
 			player.render();

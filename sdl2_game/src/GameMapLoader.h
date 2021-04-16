@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _GAME_MAP_LOADER_
+#define _GAME_MAP_LOADER_
+
 #include "EngineCore.h"
 #include "textures.h"
 #include "Player.h"
@@ -23,3 +25,4 @@ private:
 	void clearAllEntity();
 };
 
+#endif

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _GAME_WINDOW_
+#define _GAME_WINDOW_
+
 #include <SDL.h>
 #include "globalVariables.h"
 
@@ -35,3 +37,4 @@ private:
 	bool mShown;
 };
 
+#endif

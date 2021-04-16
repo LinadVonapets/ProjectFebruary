@@ -130,7 +130,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Users\10022\OneDrive\Документы\Develop Projects\gameProject_C++\sdl2_game\sdl2_game\src\Dependencies\json\include;C:\Libraries\SDL2_mixer-2.0.4\include;C:\Libraries\SDL2_ttf-2.0.15\include;C:\Libraries\SDL2_image-2.0.5\include;C:\Libraries\SDL2-2.0.12\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\10022\Documents\Develop Projects\gameProject_C++\sdl2_game\sdl2_game\src\Dependencies\json\include;C:\Libraries\SDL2_mixer-2.0.4\include;C:\Libraries\SDL2_ttf-2.0.15\include;C:\Libraries\SDL2_image-2.0.5\include;C:\Libraries\SDL2-2.0.12\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

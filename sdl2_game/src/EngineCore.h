@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _ENGINE_CORE_
+#define _ENGINE_CORE_
 #include <iostream>
 #include <string>
 #include <cmath>
@@ -91,6 +92,6 @@ extern std::string levelNumAndName[2];
 extern bool debug_mode;
 extern bool plyrShwPos;
 
-
+#endif
 
 

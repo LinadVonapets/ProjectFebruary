@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _TEXTURES_
+#define _TEXTURES_
+
 #include "GameTexture.h"
 
 extern GameTexture gPlayerTexture;
@@ -9,3 +11,5 @@ extern SDL_Rect gWallsTextureClips[];
 
 extern GameTexture gItemsTexture;
 extern SDL_Rect gItemsTextureClips[];
+
+#endif 

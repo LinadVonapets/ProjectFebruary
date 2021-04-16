@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _GAME_HUD_
+#define _GAME_HUD_
+
 #include "EngineCore.h"
 #include "GameTexture.h"
 #include "Player.h"
@@ -22,3 +24,4 @@ private:
 	SDL_Color textColor = { 0, 0, 0 };
 };
 
+#endif 

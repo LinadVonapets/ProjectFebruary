@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _GAME_TEXTURE_
+#define _GAME_TEXTURE_
+
 #include "EngineCore.h"
 
 // Класс-оболочка текстуры
@@ -49,3 +51,4 @@ private:
 	int mHeight;
 };
 
+#endif

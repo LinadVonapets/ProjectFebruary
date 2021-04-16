@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _PLAYER_
+#define _PLAYER_
+
 #include "textures.h"
 
 
@@ -52,3 +54,4 @@ private:
 	
 };
 
+#endif

@@ -25,7 +25,7 @@ TTF_Font *gFont12{ nullptr };
 #endif
 
 
-bool debug_mode = true;
+bool debug_mode = false;
 bool plyrShwPos = false;
 
 std::string levelNumAndName[2] = { "\"Level Name\"", "Level 0" };
