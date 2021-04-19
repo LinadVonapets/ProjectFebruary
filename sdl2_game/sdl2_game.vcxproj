@@ -144,9 +144,12 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>D:\10022\Documents\Develop Projects\gameProject_C++\sdl2_game\sdl2_game\src\Dependencies\json\include;C:\Libraries\SDL2_mixer-2.0.4\include;C:\Libraries\SDL2_ttf-2.0.15\include;C:\Libraries\SDL2_image-2.0.5\include;C:\Libraries\SDL2-2.0.12\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Libraries\SDL2-2.0.12\lib\x64;C:\Libraries\SDL2_image-2.0.5\lib\x64;C:\Libraries\SDL2_mixer-2.0.4\lib\x64;C:\Libraries\SDL2_ttf-2.0.15\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

@@ -1,5 +1,6 @@
 #ifndef _ENGINE_CORE_
 #define _ENGINE_CORE_
+
 #include <iostream>
 #include <string>
 #include <cmath>
